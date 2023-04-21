@@ -8,3 +8,6 @@ class Coin(models.Model):
     value = MoneyField(max_digits=4, decimal_places=2, default_currency='USD')
     year = models.IntegerField()
     description = models.TextField(max_length=300)
+
+    def __str__(self):
+        return self.country

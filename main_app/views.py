@@ -1,9 +1,6 @@
 from django.shortcuts import render
 
-# coins = [
-#   {'value': 'Quarter', 'state': 'Maryland'},
-#   {'value': 'Quarter', 'state': 'Texas'},
-# ]
+from .models import Coin
 
 # Create your views here.
 def home(request):
@@ -13,6 +10,7 @@ def about(request):
     return render(request, 'about.html')
 
 def coins_index(request):
+    coins = Coin.objects.all()
     return render(request, 'coins/index.html', {
         'coins': coins
     })
