@@ -1,9 +1,9 @@
 from django.shortcuts import render
 
-coins = [
-  {'value': 'Quarter', 'state': 'Maryland'},
-  {'value': 'Quarter', 'state': 'Texas'},
-]
+# coins = [
+#   {'value': 'Quarter', 'state': 'Maryland'},
+#   {'value': 'Quarter', 'state': 'Texas'},
+# ]
 
 # Create your views here.
 def home(request):

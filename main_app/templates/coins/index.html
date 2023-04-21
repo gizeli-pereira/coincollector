@@ -6,8 +6,11 @@
 {% for coin in coins %}
   <div class="card">
     <div class="card-content">
-      <span class="card-title">{{ coin.value }}</span>
-      <p>Coin State: {{ coin.state }}</p>
+      <span class="card-title">{{ coin.country }}</span>
+      <p>Coin State(if applicable): {{ coin.state }}</p>
+      <p>Coin Value: {{ coin.value }}</p>
+      <p>Year of production: {{ coin.year }}</p>
+      <p>Description: {{ coin.description }}</p>
     </div>
   </div>
 {% endfor %}
