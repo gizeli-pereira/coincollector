@@ -14,3 +14,9 @@ def coins_index(request):
     return render(request, 'coins/index.html', {
         'coins': coins
     })
+
+def coins_detail(request, coin_id):
+    coin = Coin.objects.get(id=coin_id)
+    return render(request, 'coins/detail.html', {
+        'coin': coin
+    })
