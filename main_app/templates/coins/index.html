@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Coins List</h1>
+
+{% for coin in coins %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ coin.value }}</span>
+      <p>Coin State: {{ coin.state }}</p>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
