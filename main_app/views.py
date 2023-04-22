@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.views.generic.edit import CreateView
 from .models import Coin
 
 # Create your views here.
@@ -20,3 +20,7 @@ def coins_detail(request, coin_id):
     return render(request, 'coins/detail.html', {
         'coin': coin
     })
+
+class CoinCreate(CreateView):
+    model = Coin
+    fields = '__all__'
