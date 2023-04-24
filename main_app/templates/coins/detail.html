@@ -21,9 +21,15 @@
 </div>
 
 <div class="col s6">
+    <form action="{% url 'add_formatmaterial' coin.id %}" method="POST">
+        {% csrf_token %}
+        <!-- Render the inputs -->
+        {{ formatmaterial_form.as_p }}
+        <input type="submit" class="btn" value="Add Coin Format/Material">
+    </form>
     <table class="striped">
       <thead>
-        <tr><th>Format</th><th>Material</th></tr>
+        <tr><th>Coin Format</th><th>Coin Material</th></tr>
       </thead>
       <tbody>
         {% for formatmaterial in coin.formatmaterial_set.all %}
@@ -35,5 +41,12 @@
       </tbody>
     </table>
   </div>
+  <script>
+    const formatEl = document.getElementById('id_format');
+    M.FormSelect.init(formatEl);
+
+    const materialEl = document.getElementById('id_material');
+    M.FormSelect.init(materialEl);
+  </script>
 
 {% endblock %}
