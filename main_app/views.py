@@ -24,7 +24,7 @@ def coins_detail(request, coin_id):
 class CoinCreate(CreateView):
     model = Coin
     fields = '__all__'
-    success_url = '/coins/{coin_id}'
+    # success_url = '/coins/{coin_id}'
 
 class CoinUpdate(UpdateView):
     model = Coin
