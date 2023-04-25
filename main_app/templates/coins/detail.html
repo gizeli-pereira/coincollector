@@ -1,26 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Coin Details</h1>
+  <h1>Coin Details</h1>
 
-<div class="row">
-    <div class="col s6">
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">{{ coin.country }}</span>
-                <p>Coin State (if applicable): {{ coin.state }}</p>
-                <p>Coin Value: {{ coin.value }}</p>
-                <p>Year of production: {{ coin.year }}</p>
-                <p>Description: {{ coin.description|linebreaks }}</p>
-            </div>
-            <div class="card-action">
-                <a href="{% url 'coins_update' coin.id %}">Edit</a>
-                <a href="{% url 'coins_delete' coin.id %}">Delete</a>
-            </div>
-        </div>
-</div>
+  <div class="row">
+      <div class="col s6">
+          <div class="card">
+              <div class="card-content">
+                  <span class="card-title">{{ coin.country }}</span>
+                  <p>Coin State (if applicable): {{ coin.state }}</p>
+                  <p>Coin Value: {{ coin.value }}</p>
+                  <p>Year of production: {{ coin.year }}</p>
+                  <p>Description: {{ coin.description|linebreaks }}</p>
+              </div>
+              <div class="card-action">
+                  <a href="{% url 'coins_update' coin.id %}">Edit</a>
+                  <a href="{% url 'coins_delete' coin.id %}">Delete</a>
+              </div>
+          </div>
+  </div>
 
-<div class="col s6">
+  <div class="col s6">
     <form action="{% url 'add_formatmaterial' coin.id %}" method="POST">
         {% csrf_token %}
         <!-- Render the inputs -->
@@ -43,29 +43,52 @@
   </div>
 
   <hr>
-<div class="row">
-  <div class="col s6">
-    <h3>{{ coin.country }}'s Imperfections</h3>
-    {% if coin.imperfections.count %}
-      {% for imperfection in coin.imperfections.all %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">
-              {{ imperfection.name }}
-            </span>
+  <div class="row">
+    <div class="col s6">
+      <h3>{{ coin.country }}'s Imperfections</h3>
+      {% if coin.imperfections.count %}
+        {% for imperfection in coin.imperfections.all %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                {{ imperfection.name }}
+              </span>
+            </div>
+            <div class="card-action">
+              <form action="{% url 'unassoc_imperfection' coin.id imperfection.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Remove</button>
+              </form>
+            </div>
           </div>
-          <!-- <div class="card-action">
-            <form action="{% url 'unassoc_imperfection' coin.id imperfection.id %}" method="POST">
-              {% csrf_token %}
-              <button type="submit" class="btn">Remove</button>
-            </form>
-          </div> -->
-        </div>
-      {% endfor %}
-    {% else %}
-      <h5>No imperfections!</h5>
-    {% endif %}
-  </div>
+        {% endfor %}
+      {% else %}
+        <h5>No imperfections!</h5>
+      {% endif %}
+    </div>
+    
+    <div class="col s6">
+      <h3>Available Imperfections</h3>
+      {% if imperfections.count %}
+        {% for imperfection in imperfections.all %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+               {{ imperfection.name }}
+              </span>
+            </div>
+            <div class="card-action">
+              <form action="{% url 'assoc_imperfection' coin.id imperfection.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Add</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h5>{{coin.country}} Already Has All Imperfections Listed</h5>
+      {% endif %}
+    </div>
 
   <script>
     const formatEl = document.getElementById('id_format');

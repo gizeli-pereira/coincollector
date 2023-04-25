@@ -22,7 +22,7 @@ class Imperfection(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('imperfection_detail', kwargs={'pk': self.id})
+        return reverse('imperfections_detail', kwargs={'pk': self.id})
 
 class Coin(models.Model):
     country = models.CharField(max_length=100)
@@ -30,6 +30,7 @@ class Coin(models.Model):
     value = MoneyField(max_digits=4, decimal_places=2, default_currency='USD')
     year = models.IntegerField('Year the coin was struck')
     description = models.TextField(max_length=300)
+    imperfections = models.ManyToManyField(Imperfection)
 
     def __str__(self):
         return self.country

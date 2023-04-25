@@ -19,9 +19,12 @@ def coins_index(request):
 
 def coins_detail(request, coin_id):
     coin = Coin.objects.get(id=coin_id)
+    id_list = coin.imperfections.all().values_list('id')
+    imperfections_coin_doesnt_have = Imperfection.objects.exclude(id__in=id_list)
     formatmaterial_form = FormatMaterialForm()
     return render(request, 'coins/detail.html', {
-        'coin': coin, 'formatmaterial_form': formatmaterial_form
+        'coin': coin, 'formatmaterial_form': formatmaterial_form,
+        'imperfections': imperfections_coin_doesnt_have
     })
 
 def add_formatmaterial(request, coin_id):
@@ -34,7 +37,7 @@ def add_formatmaterial(request, coin_id):
 
 class CoinCreate(CreateView):
     model = Coin
-    fields = '__all__'
+    fields = ['country', 'state', 'value', 'year', 'description']
 
 class CoinUpdate(UpdateView):
     model = Coin
@@ -61,3 +64,11 @@ class ImperfectionUpdate(UpdateView):
 class ImperfectionDelete(DeleteView):
   model = Imperfection
   success_url = '/imperfections'
+
+def assoc_imperfection(request, coin_id, imperfection_id):
+   Coin.objects.get(id=coin_id).imperfections.add(imperfection_id)
+   return redirect('detail', coin_id=coin_id)
+
+def unassoc_imperfection(request, coin_id, imperfection_id):
+   Coin.objects.get(id=coin_id).imperfections.remove(imperfection_id)
+   return redirect('detail', coin_id=coin_id)
