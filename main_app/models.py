@@ -27,7 +27,7 @@ class Coin(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'coin_id': self.id})
-    
+ 
 class FormatMaterial(models.Model):
     format = models.CharField(
         max_length=1, 
