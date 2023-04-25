@@ -15,6 +15,15 @@ MATERIALS = (
 )
 
 # Create your models here.
+class Imperfection(models.Model):
+    name = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('imperfection_detail', kwargs={'pk': self.id})
+
 class Coin(models.Model):
     country = models.CharField(max_length=100)
     state = models.CharField(max_length=100)

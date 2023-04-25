@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Coin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView 
+from django.views.generic import ListView, DetailView
+from .models import Coin, Imperfection
 from .forms import FormatMaterialForm
 
 # Create your views here.
@@ -42,3 +43,21 @@ class CoinUpdate(UpdateView):
 class CoinDelete(DeleteView):
     model = Coin
     success_url = '/coins'
+
+class ImperfectionList(ListView):
+  model = Imperfection
+
+class ImperfectionDetail(DetailView):
+  model = Imperfection
+
+class ImperfectionCreate(CreateView):
+  model = Imperfection
+  fields = '__all__'
+
+class ImperfectionUpdate(UpdateView):
+  model = Imperfection
+  fields = ['name']
+
+class ImperfectionDelete(DeleteView):
+  model = Imperfection
+  success_url = '/imperfections'

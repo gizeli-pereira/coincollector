@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Imperfections List</h1>
+
+{% for imperfection in imperfection_list %}
+  <a href="{% url 'imperfections_detail' imperfection.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ imperfection.name }}</span>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}
