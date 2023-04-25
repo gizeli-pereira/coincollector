@@ -11,7 +11,7 @@ def about(request):
     return render(request, 'about.html')
 
 def coins_index(request):
-    coins = Coin.objects.all()
+    coins = Coin.objects.order_by('country')
     return render(request, 'coins/index.html', {
         'coins': coins
     })
